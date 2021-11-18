@@ -1,8 +1,7 @@
 <template>
-  <div class="question" @click="goToDetailPage(question.id)">
+  <div class="question">
     <div class="title">
       <h2>{{ question.title }}</h2>
-      <button>답변확인</button>
     </div>
     <div class="content">
       <p>
@@ -17,12 +16,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import Question from '../interfaces/question';
 
 @Component
-export default class QuestionItem extends Vue {
+export default class QuestionDetailItem extends Vue {
   @Prop() private readonly question!: Question;
-
-  goToDetailPage(id: number) {
-    this.$router.push('/qna/'+id);
-  }
 }
 </script>
 

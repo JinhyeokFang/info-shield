@@ -5,6 +5,7 @@ import Signin from '../views/Signin.vue'
 import Signout from '../views/Signout.vue'
 import Server from '../views/Server.vue'
 import QnA from '../views/QnA.vue'
+import QnADetail from '../views/QnADetail.vue'
 import Workbook from '../views/Workbook.vue'
 
 Vue.use(VueRouter)
@@ -34,6 +35,12 @@ const routes: Array<RouteConfig> = [
     path: '/qna',
     name: 'QnA',
     component: QnA
+  },
+  {
+    path: '/qna/:id',
+    name: 'QnADetail',
+    component: QnADetail,
+    props: true
   },
   {
     path: '/workbook',

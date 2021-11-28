@@ -7,7 +7,7 @@
       <nav>
         <button v-for="item in menu" :key="item.path" button :class="{highlighted: currentPath === item.path}"><router-link :to="item.path">{{item.name}}</router-link></button>
         <div class="profile">
-          프로필
+          {{ name }}님 안녕하세요!
         </div>
       </nav>
     </header>
@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import user from './api/user';
 import Menu from './interfaces/menu';
 
 @Component({
@@ -26,12 +27,9 @@ import Menu from './interfaces/menu';
 })
 export default class App extends Vue {
   private currentPath = '/';
+  private name = "";
 
   get menu(): Menu[] {
-    // if (this.currentPath == '/') {
-    //   return [
-    //   ]
-    // } else {
       return [
         {path: '/', name: '강의 수강'},
         {path: '/server', name: '서버 연결'},
@@ -39,7 +37,6 @@ export default class App extends Vue {
         {path: '/qna', name: 'Q&A'},
         {path: '/signout', name: '로그아웃'},
       ]
-    // }
   }
 
   get showHeader() {
@@ -50,12 +47,26 @@ export default class App extends Vue {
     this.currentPath = this.$router.currentRoute.path;
   }
 
+  async checkUserInfo() {
+    try {
+      const profile = await user.getInfo();
+      this.name = profile.data.data.name;
+      if (profile.status === 200 && this.currentPath === '/signin')
+        this.$router.push('/');
+    } catch (error) {
+      if (error.response.status === 401 && this.currentPath !== '/signin')
+        this.$router.push('/signin');
+    }
+  }
+
   mounted() {
     this.setMenu();
+    this.checkUserInfo();
   }
 
   updated() {
     this.setMenu();
+    this.checkUserInfo();
   }
 }
 </script>

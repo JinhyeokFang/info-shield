@@ -4,10 +4,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import user from '../api/user';
 
 @Component
 export default class Signout extends Vue {
-  mounted() {
+  async mounted() {
+    await user.logout();
     this.$router.push('/signin');
   }
 }

@@ -6,20 +6,27 @@ class UserApi {
     });
 
     logout (): Promise<AxiosResponse> {
-        return this.httpRequest.get('/logout');
+        return this.httpRequest.get('/logout', {withCredentials: true});
     }
 
     signin (id: string, password: string): Promise<AxiosResponse> {
-        return this.httpRequest.post('/signin', { id, pw: password });
+        const formdata = new FormData();
+        formdata.append('id', id);
+        formdata.append('pw', password);
+        return this.httpRequest.post('/signin', formdata);
     }
 
     signup (id: string, password: string, name: string): Promise<AxiosResponse> {
-        return this.httpRequest.post('/signin', { id, pw: password, name });
+        const formdata = new FormData();
+        formdata.append('id', id);
+        formdata.append('pw', password);
+        formdata.append('name', name);
+        return this.httpRequest.post('/signup', formdata);
     }
 
     getInfo (): Promise<AxiosResponse> {
-        return this.httpRequest.get('/user/info');
+        return this.httpRequest.get('/user/info', {withCredentials: true});
     }
 }
 
-export default new AuthApi();
+export default new UserApi();

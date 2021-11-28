@@ -6,19 +6,19 @@ class ClassApi {
     });
 
     getMyClass (): Promise<AxiosResponse> {
-        return this.httpRequest.get('/');
+        return this.httpRequest.get('/', {withCredentials: true});
     }
 
     getClassInfo (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/${id}`);
+        return this.httpRequest.get(`/${id}`, {withCredentials: true});
     }
 
     getClassProblems (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/${id}/prob`);
+        return this.httpRequest.get(`/${id}/prob`, {withCredentials: true});
     }
 
     getClasses (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/list`);
+        return this.httpRequest.get(`/list`, {withCredentials: true});
     }
 }
 

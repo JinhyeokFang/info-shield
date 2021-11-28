@@ -6,7 +6,7 @@ class ProblemAPI {
     });
 
     getProblem (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/${id}`);
+        return this.httpRequest.get(`/${id}`, {withCredentials: true});
     }
 }
 

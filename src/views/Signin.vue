@@ -10,15 +10,15 @@
           <button @click="tab = 'Signup'" :class="{highlighted: tab === 'Signup'}">SIGN UP</button>
         </div>
         <div class="input-container signin" v-if="tab === 'Signin'">
-          <input type="text" placeholder="ID">
-          <input type="password" placeholder="Password">
+          <input v-model="id" type="text" placeholder="ID">
+          <input v-model="password" type="password" placeholder="Password">
           <button @click="signin()">SIGN IN</button>
         </div>
         <div class="input-container signup" v-if="tab === 'Signup'">
-          <input type="text" placeholder="ID">
-          <input type="password" placeholder="Password">
-          <input type="password" placeholder="Password Retype">
-          <input type="text" placeholder="Name">
+          <input v-model="id" type="text" placeholder="ID">
+          <input v-model="password" type="password" placeholder="Password">
+          <input v-model="passwordRetype" type="password" placeholder="Password Retype">
+          <input v-model="name" type="text" placeholder="Name">
           <button @click="signup()">SIGN UP</button>
         </div>
       </div>
@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import UserApi from '../api/user';
 
 const Tab = {
   Signin: 'Signin',
@@ -40,13 +41,33 @@ const Tab = {
 })
 export default class Signin extends Vue {
   private tab: string = Tab.Signin;
+  private id = "";
+  private password = "";
+  private passwordRetype = "";
+  private name = "";
 
-  signin() {
-    this.$router.push('/');
+  async signin() {
+    try {
+      await UserApi.signin(this.id, this.password);
+      this.$router.push('/');
+    } catch (e) {
+      console.dir(e);
+      alert("로그인 실패");
+    }
   }
 
-  signup() {
-    this.$router.push('/');
+  async signup() {
+    if (this.password !== this.passwordRetype) {
+      alert("입력한 비밀번호가 같지 않습니다.");
+      throw new Error("입력한 비밀번호가 같지 않습니다.");
+    }
+    try {
+      await UserApi.signup(this.id, this.password, this.name);
+      alert("회원가입 성공");
+    } catch (e) {
+      alert("회원가입 실패");
+      console.dir(e);
+    }
   }
 }
 </script>

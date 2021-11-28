@@ -2,23 +2,24 @@ import axios, { AxiosResponse } from 'axios';
 
 class ClassApi {
     private httpRequest = axios.create({
-        baseURL: 'http://118.67.133.248:11111/class'
+        baseURL: 'http://118.67.133.248:11111/class',
+        withCredentials: true
     });
 
     getMyClass (): Promise<AxiosResponse> {
-        return this.httpRequest.get('/', {withCredentials: true});
+        return this.httpRequest.get('/');
     }
 
     getClassInfo (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/${id}`, {withCredentials: true});
+        return this.httpRequest.get(`/${id}`);
     }
 
     getClassProblems (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/${id}/prob`, {withCredentials: true});
+        return this.httpRequest.get(`/${id}/prob`);
     }
 
     getClasses (id: number): Promise<AxiosResponse> {
-        return this.httpRequest.get(`/list`, {withCredentials: true});
+        return this.httpRequest.get(`/list`);
     }
 }
 

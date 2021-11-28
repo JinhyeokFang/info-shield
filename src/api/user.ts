@@ -2,11 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 
 class UserApi {
     private httpRequest = axios.create({
-        baseURL: 'http://118.67.133.248:11111/'
+        baseURL: 'http://118.67.133.248:11111/',
+        withCredentials: true
     });
 
     logout (): Promise<AxiosResponse> {
-        return this.httpRequest.get('/logout', {withCredentials: true});
+        return this.httpRequest.get('/logout');
     }
 
     signin (id: string, password: string): Promise<AxiosResponse> {
@@ -25,7 +26,7 @@ class UserApi {
     }
 
     getInfo (): Promise<AxiosResponse> {
-        return this.httpRequest.get('/user/info', {withCredentials: true});
+        return this.httpRequest.get('/user/info');
     }
 }
 

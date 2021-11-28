@@ -48,7 +48,7 @@ export default class Signin extends Vue {
 
   async signin() {
     try {
-      await UserApi.signin(this.id, this.password);
+      const response = await UserApi.signin(this.id, this.password);
       this.$router.push('/');
     } catch (e) {
       console.dir(e);

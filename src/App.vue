@@ -54,8 +54,8 @@ export default class App extends Vue {
       if (profile.status === 200 && this.currentPath === '/signin')
         this.$router.push('/');
     } catch (error) {
-      if (error.response.status === 401 && this.currentPath !== '/signin')
-        this.$router.push('/signin');
+      // if (error.response.status === 401 && this.currentPath !== '/signin')
+      //   this.$router.push('/signin');
     }
   }
 

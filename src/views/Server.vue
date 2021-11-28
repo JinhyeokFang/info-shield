@@ -20,9 +20,6 @@ import Container from '../interfaces/container';
 export default class Server extends Vue {
   private containers: Container[] = [
     {id: 1, name: "Cent OS"},
-    {id: 2, name: "Cent OS"},
-    {id: 3, name: "Cent OS"},
-    {id: 4, name: "Cent OS"}
   ]; 
 }
 </script>

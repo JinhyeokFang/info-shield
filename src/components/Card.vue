@@ -4,8 +4,8 @@
 
     </div>
     <div class="content">
-      <h2>{{ lecture.title }}</h2>
-      <p>{{ lecture.content }}</p>
+      <h2 :title="lecture.title">{{ lecture.title }}</h2>
+      <p :title="lecture.content">{{ lecture.content }}</p>
     </div>
   </div>
 </template>
@@ -43,7 +43,6 @@ export default class Card extends Vue {
       width: 300px;
       height: 90px;
       box-sizing: border-box;
-
       padding-top: 5px;
       padding-left: 10px;
 
@@ -52,11 +51,17 @@ export default class Card extends Vue {
       h2 {
         margin: 0;
         color: #6f6f6f;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       p {
         margin: 0;
         color: #6f6f6f;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
   }

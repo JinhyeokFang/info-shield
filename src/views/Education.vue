@@ -9,6 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import classapi from '../api/class';
 import Card from '../components/Card.vue';
 import Lecture from '../interfaces/lecture';
 
@@ -18,12 +19,20 @@ import Lecture from '../interfaces/lecture';
   }
 })
 export default class Education extends Vue {
-  private lectures: Lecture[] = [
-    {id: 1, title: "CentOS 시스템 보안", content: "lorem ipsum", manager: "매니저"},
-    {id: 2, title: "CentOS 시스템 보안", content: "lorem ipsum", manager: "매니저"},
-    {id: 3, title: "CentOS 시스템 보안", content: "lorem ipsum", manager: "매니저"},
-    {id: 4, title: "CentOS 시스템 보안", content: "lorem ipsum", manager: "매니저"}
-  ]; 
+  private lectures: Lecture[] = [];
+
+  mounted() {
+    this.loadLectures();
+  }
+
+  async loadLectures() {
+    const response = await classapi.getClasses();
+    console.dir(response.data);
+    this.lectures = [];
+    for (let lecture of response.data.data) {
+      this.lectures.push({ id: lecture.idx, title: lecture.title, content: lecture.content, manager: '' });
+    }
+  }
 }
 </script>
 

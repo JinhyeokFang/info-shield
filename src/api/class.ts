@@ -6,7 +6,7 @@ class ClassApi {
         withCredentials: true
     });
 
-    getMyClass (): Promise<AxiosResponse> {
+    getClass (): Promise<AxiosResponse> {
         return this.httpRequest.get('/');
     }
 
@@ -18,8 +18,12 @@ class ClassApi {
         return this.httpRequest.get(`/${id}/prob`);
     }
 
-    getClasses (id: number): Promise<AxiosResponse> {
+    getClasses (): Promise<AxiosResponse> {
         return this.httpRequest.get(`/list`);
+    }
+
+    getMyClass (): Promise<AxiosResponse> {
+        return this.httpRequest.get('/myclass');
     }
 }
 

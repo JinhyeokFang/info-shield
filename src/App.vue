@@ -7,7 +7,6 @@
       <nav>
         <button v-for="item in menu" :key="item.path" button :class="{highlighted: currentPath === item.path}"><router-link :to="item.path">{{item.name}}</router-link></button>
         <div class="profile">
-          {{ name }}님 안녕하세요!
         </div>
       </nav>
     </header>
@@ -54,8 +53,8 @@ export default class App extends Vue {
       if (profile.status === 200 && this.currentPath === '/signin')
         this.$router.push('/');
     } catch (error) {
-      // if (error.response.status === 401 && this.currentPath !== '/signin')
-      //   this.$router.push('/signin');
+      if (error.response.status === 401 && this.currentPath !== '/signin')
+        this.$router.push('/signin');
     }
   }
 

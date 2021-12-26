@@ -60,7 +60,6 @@ export default class QuestionItem extends Vue {
         cursor: pointer;
 
         color: white;
-        filter: drop-shadow(0px 3px 3px $shadow-color);
       }
     }
 

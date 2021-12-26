@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import ContainerItem from '../components/ContainerItem.vue';
-import Container from '../interfaces/container';
+import Container, { ContainerStatus } from '../interfaces/container';
 
 @Component({
   components: {
@@ -19,7 +19,7 @@ import Container from '../interfaces/container';
 })
 export default class Server extends Vue {
   private containers: Container[] = [
-    {id: 1, name: "Cent OS"},
+    {id: 1, name: "Cent OS", status: ContainerStatus.created},
   ]; 
 }
 </script>
